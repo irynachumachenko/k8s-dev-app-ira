@@ -1,0 +1,14 @@
+# Git and IDE files
+.git
+.gitignore
+.vscode
+.idea
+*.log
+
+# Docker-related files
+Dockerfile
+logs
+
+# OS and temporary files
+.DS_Store
+Thumbs.db
