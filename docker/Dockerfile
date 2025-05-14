@@ -1,14 +1,23 @@
-FROM node:22-alpine
+# Base
+FROM node:22-alpine AS base
 
 WORKDIR /srv/app
 COPY package.json yarn.lock ./
 
 RUN yarn install
 
-COPY ../ ./
+COPY . .
+
+# Dev
+FROM base AS dev
+ENV MODE=dev
 
 EXPOSE 1234
+CMD ["sh", "-c", "printenv && yarn dev"]
 
-ENTRYPOINT [ "yarn" ]
+# Prod
+FROM base AS prod
+ENV MODE=prod
 
-CMD [ "dev" ]
+EXPOSE 1234
+CMD ["sh", "-c", "printenv && yarn dev"]

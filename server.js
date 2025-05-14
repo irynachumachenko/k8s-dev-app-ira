@@ -14,14 +14,15 @@ const runServer = async () => {
     const vite = await createServer({
         root: '.',
         server: { port: 1234, host: true },
+        mode: process.env.MODE
     });
 
     await vite.listen();
 
-    console.log("Server running at:");
+    console.log(`Server running at:`);
     vite.printUrls();
 
     fs.appendFileSync(logFile, `App started at: ${new Date().toISOString()}\n`);
 };
 
-runServer();
+void runServer();

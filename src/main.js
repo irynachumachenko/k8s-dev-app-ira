@@ -16,7 +16,7 @@ document.querySelector('#app').innerHTML = `
       <button id="counter" type="button"></button>
     </div>
     <p class="read-the-docs">
-      Click on the Vite logo to learn more
+      Vite is running in ${import.meta.env.MODE} mode with VITE_ENV=${import.meta.env.VITE_ENV}
     </p>
   </div>
 `
