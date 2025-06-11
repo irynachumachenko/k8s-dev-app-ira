@@ -4,7 +4,7 @@ services:
   dev-app:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: deploy/docker/Dockerfile
       target: dev
     ports:
       - "4321:1234"
@@ -15,7 +15,7 @@ services:
   prod-app:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: deploy/docker/Dockerfile
       target: prod
     ports:
       - "5432:1234"

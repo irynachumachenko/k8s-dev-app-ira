@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name:  "dev-vite"
+  namespace: "dev-ruslan-ns"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dev-vite-app
+  template:
+    metadata:
+      labels:
+        app: dev-vite-app
+    spec:
+      containers:
+        - name: dev-vite-app
+          image: rushinside/docker-vite-dev:1.1.0
+          env:
+            - name: MODE
+              value: "dev"
+          ports:
+            - containerPort: 1234

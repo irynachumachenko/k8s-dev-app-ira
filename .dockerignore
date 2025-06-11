@@ -6,7 +6,7 @@
 *.log
 
 # Docker-related files
-Dockerfile
+deploy
 logs
 
 # OS and temporary files

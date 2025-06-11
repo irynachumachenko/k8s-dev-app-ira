@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "dev-vite"
+  namespace: "dev-ruslan-ns"
+  labels:
+    app: dev-vite-app
+spec:
+  containers:
+    - name: dev-vite-app
+      image: rushinside/docker-vite-dev:1.1.0
+      env:
+        - name: MODE
+          value: "dev"
+      ports:
+        - containerPort: 1234
