@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vite-config
+  namespace: dev-ruslan-ns
+data:
+  VITE_APP_NAME: dev-vite-app
+  VITE_LOG_LEVEL: debug
+  VITE_APP_ENV: dev
+  VITE_SENTRY_DSN: test.sentry.dsn

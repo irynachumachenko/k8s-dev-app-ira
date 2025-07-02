@@ -6,11 +6,14 @@ services:
       context: .
       dockerfile: deploy/docker/Dockerfile
       target: dev
+      platforms:
+        - linux/amd64
     ports:
       - "4321:1234"
     volumes:
       - ./logs:/srv/app/logs
-    container_name: docker-test-dev
+    container_name: dev-vite-app
+    image: dev-vite-app-amd
 
   prod-app:
     build:
@@ -21,4 +24,4 @@ services:
       - "5432:1234"
     volumes:
       - ./logs:/srv/app/logs
-    container_name: docker-test-prod
+    container_name: prod-vite-app

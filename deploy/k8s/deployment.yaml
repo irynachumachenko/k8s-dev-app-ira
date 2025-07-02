@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-vite
+  namespace: dev-ruslan-ns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dev-vite-app
+  template:
+    metadata:
+      labels:
+        app: dev-vite-app
+    spec:
+      containers:
+        - name: dev-vite-app
+          image: rushinside/docker-vite-dev-amd:1.4.0
+          envFrom:
+            - configMapRef:
+                name: vite-config
+          env:
+            - name: MODE
+              value: "dev"
+          ports:
+            - containerPort: 1234
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 1234
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 1234
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 2

@@ -18,6 +18,15 @@ document.querySelector('#app').innerHTML = `
     <p class="read-the-docs">
       Vite is running in ${import.meta.env.MODE} mode with VITE_ENV=${import.meta.env.VITE_ENV}
     </p>
+    <p class="read-the-docs">
+      ConfigMap:
+    </p>
+    <ul>
+      <li>VITE_APP_NAME: ${import.meta.env.VITE_APP_NAME}</li>
+      <li>VITE_LOG_LEVEL: ${import.meta.env.VITE_LOG_LEVEL}</li>
+      <li>VITE_APP_ENV: ${import.meta.env.VITE_APP_ENV}</li>
+      <li>VITE_SENTRY_DSN: ${import.meta.env.VITE_SENTRY_DSN}</li>
+    </ul>
   </div>
 `
 

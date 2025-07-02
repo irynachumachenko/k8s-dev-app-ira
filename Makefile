@@ -1,14 +1,19 @@
-build-dev:
-	docker build \
-		-f docker/Dockerfile \
-		-t docker-test-dev \
+buildx-dev:
+	docker buildx build \
+		--platform linux/amd64,linux/arm64 \
+		-f deploy/docker/Dockerfile \
 		--target dev \
+		-t rushinside/docker-vite-dev:1.2.0 \
+		--push \
 		.
-build-prod:
-	docker build \
-		-f docker/Dockerfile \
-		-t docker-test-prod \
+
+buildx-prod:
+	docker buildx build \
+		--platform linux/amd64,linux/arm64 \
+		-f deploy/docker/Dockerfile \
 		--target prod \
+		-t rushinside/docker-vite-prod:1.1.0 \
+		--push \
 		.
 
 run-dev:
