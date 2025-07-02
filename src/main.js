@@ -1,33 +1,30 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import { APP_URL_ID, ENV_LIST_ID, CONFIG_LIST_ID, configMapKeys } from './config';
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Docker Test Server!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Vite is running in ${import.meta.env.MODE} mode with VITE_ENV=${import.meta.env.VITE_ENV}
-    </p>
-    <p class="read-the-docs">
-      ConfigMap:
-    </p>
-    <ul>
-      <li>VITE_APP_NAME: ${import.meta.env.VITE_APP_NAME}</li>
-      <li>VITE_LOG_LEVEL: ${import.meta.env.VITE_LOG_LEVEL}</li>
-      <li>VITE_APP_ENV: ${import.meta.env.VITE_APP_ENV}</li>
-      <li>VITE_SENTRY_DSN: ${import.meta.env.VITE_SENTRY_DSN}</li>
-    </ul>
-  </div>
-`
+document.addEventListener("DOMContentLoaded", () => {
+  const appUrlEl = document.getElementById(APP_URL_ID);
+  if (appUrlEl !== null) {
+    appUrlEl.textContent = window.location.href;
+  }
 
-setupCounter(document.querySelector('#counter'))
+  const envList = document.getElementById(ENV_LIST_ID);
+  if (envList !== null) {
+    const listItems = Object.entries(import.meta.env).map(([key, val]) => (`
+      <tr>
+        <td>${key}</td>
+        <td>${val}</td>
+      </tr>
+    `));
+    envList.innerHTML = listItems.join('\n');
+  }
+
+  const configMapList = document.getElementById(CONFIG_LIST_ID);
+  if (configMapList !== null) {
+    const listItems = configMapKeys.map((key) => (`
+      <tr>
+        <td>${key}</td>
+        <td>${import.meta.env[key]}</td>
+      </tr>
+    `));
+    configMapList.innerHTML = listItems.join('\n');
+  }
+});

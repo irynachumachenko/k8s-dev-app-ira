@@ -10,9 +10,9 @@ if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir, { recursive: true });
 }
 
-function healthCheckPlugin() {
+const probeCheckPlugin = () => {
     return {
-        name: 'health-check',
+        name: 'probe-check',
         configureServer(server) {
             server.middlewares.use((req, res, next) => {
                 switch (req.url) {
@@ -45,7 +45,7 @@ function healthCheckPlugin() {
 
 const runServer = async () => {
     const vite = await createServer({
-        plugins: [healthCheckPlugin()],
+        plugins: [probeCheckPlugin()],
         root: '.',
         server: { port: 1234, host: true },
         mode: process.env.MODE
