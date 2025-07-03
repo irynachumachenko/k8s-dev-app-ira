@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+  namespace: {{ .Values.app.namespace }}
+data:
+  VITE_APP_NAME: {{ .Release.Name }}
+  APP_VERSION: {{ .Values.app.version | quote }}
+  VITE_APP_ENV: {{ .Values.app.env | quote }}
+  VITE_LOG_LEVEL: {{ .Values.app.logLevel | quote }}
+  VITE_SENTRY_DSN: {{ .Values.app.sentryDsn | quote }}
