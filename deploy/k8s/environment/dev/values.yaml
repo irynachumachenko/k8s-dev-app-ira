@@ -17,8 +17,5 @@ app:
     role: backend
 
 image:
-  registry: "docker.io"
-  username: "laba21"
-  names:
-    main: "laba21/vite"
+  repository: "laba21/vite"
   tag: "1.0.0"

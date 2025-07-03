@@ -19,7 +19,7 @@ spec:
       nodeSelector: {{- toYaml .Values.app.nodeSelector | nindent 8 }}
       containers:
         - name: app
-          image: {{ .Values.image.names.main }}:{{ .Values.image.tag }}
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-config
