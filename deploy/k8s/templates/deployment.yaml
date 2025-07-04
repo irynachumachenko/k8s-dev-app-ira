@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-app
+  namespace: {{ .Values.app.namespace }}
+  labels:
+    app: {{ .Release.Name }}-app
+spec:
+  replicas: {{ .Values.app.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-app
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-app
+    spec:
+      nodeSelector: {{- toYaml .Values.app.nodeSelector | nindent 8 }}
+      containers:
+        - name: app
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-config
+          env:
+            - name: MODE
+              value: {{ .Values.app.env | quote }}
+          ports:
+            - containerPort: {{ .Values.app.ports.rest }}
+          resources:
+            requests:
+              cpu: {{ .Values.app.resources.requests.cpu | quote }}
+              memory: {{ .Values.app.resources.requests.memory | quote }}
+            limits:
+              cpu: {{ .Values.app.resources.limits.cpu | quote }}
+              memory: {{ .Values.app.resources.limits.memory | quote }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.app.ports.rest }}
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.app.ports.rest }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 2
