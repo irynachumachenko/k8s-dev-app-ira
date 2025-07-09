@@ -18,4 +18,12 @@ app:
 
 image:
   repository: "laba21/vite"
-  tag: "1.0.0"
+  tag:
+    "1.0.1" # пересобран docker image с обновленной конфигурацией Vite (vite.config.js),
+    # разрешен доступ с доступ с домена *.dev.acdm.space
+
+ingress:
+  enabled: true
+  # ВАЖЛИВО: замініть на власний домен, але ОБОВ’ЯЗКОВО в межах *.dev.acdm.space
+  # Приклад: vite-anna.dev.acdm.space
+  host: vite.dev.acdm.space
