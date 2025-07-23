@@ -29,10 +29,10 @@ jobs:
         run: |
           docker build \
             -f deploy/docker/Dockerfile \
-            -t irinalutsenko/dockercourse:${{ github.event.inputs.image_tag }}
+            -t irinalutsenko/vite:${{ github.event.inputs.image_tag }} \
             .
         shell: bash
 
       - name: Push Docker image
-        run: docker push laba21/vite:${{ github.event.inputs.image_tag }}
+        run: docker push irinalutsenko/vite:${{ github.event.inputs.image_tag }}
         shell: bash
