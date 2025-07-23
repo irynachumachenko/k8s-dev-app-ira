@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build & Push Docker
-    runs-on: dev-arc-runner-set
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
